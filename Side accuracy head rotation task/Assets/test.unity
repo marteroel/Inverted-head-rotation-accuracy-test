@@ -227,9 +227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   head: {fileID: 1489064885}
-  activateRandomly: 1
-  totalTrials: 0
   sound: {fileID: 1608120787}
+  activateRandomly: 1
+  totalTrials: 5
   bounds: 2d0000005a0000000e0100003b010000
   inverted: 0
 --- !u!4 &1052631260
