@@ -10,17 +10,15 @@ public class HeadRotationTask : MonoBehaviour
 	public AudioSource sound;
     public int lMinThres, lMaxThres, rMinThres, rMaxThres;
 
-
 	private bool isInRange;
 	private string lastDirection;
 
 
 	void Start() {
 		string[] directions = new string[] {"left", "right"};
-		lastDirection = directions[Random.Range(0,2)]; //initializing lastDirection randomly so either side can be first
+		lastDirection = directions[Random.Range(0,2)];
 	}
 
-    // Update is called once per frame
     void Update()
     {
 		if(!isInRange){
@@ -46,7 +44,6 @@ public class HeadRotationTask : MonoBehaviour
 		//start timer
 
 		if(trialOrNot == 1) {
-		    //Debug.Log("start " + side );
 			sound.Play();
 
 			if(side == "left") 
@@ -55,8 +52,6 @@ public class HeadRotationTask : MonoBehaviour
 			else  
 				while(head.eulerAngles.y < rMaxThres  && head.eulerAngles.y > rMinThres)
 					yield return null;
-
-            //Debug.Log("stop " + side);
 		}
 
 		else yield return null;
