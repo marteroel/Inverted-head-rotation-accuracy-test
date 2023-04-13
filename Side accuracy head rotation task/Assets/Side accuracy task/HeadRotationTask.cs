@@ -99,4 +99,8 @@ public class HeadRotationTask : MonoBehaviour {
 		isInRange = false;		
 	}
 
+    public void SetInvertionBool(bool _inversion) {
+        inverted = _inversion;
+    }
+
 }
