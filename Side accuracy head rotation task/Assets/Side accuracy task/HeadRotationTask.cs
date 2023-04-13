@@ -75,7 +75,7 @@ public class HeadRotationTask : MonoBehaviour {
                 else answer = "incorrect";
 
             else if (Input.GetMouseButton(1))//if the pressed key is right
-            //if (Input.GetKeyDown("c"))
+                //if (Input.GetKeyDown("c"))for testing
                 if (side == mouseResponse[1]) answer = "correct";
                 else answer = "incorrect";
 
