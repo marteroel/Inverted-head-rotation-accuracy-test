@@ -10,7 +10,7 @@ public class HeadRotationTask : MonoBehaviour {
     public int totalTrials;   
     [Tooltip("left min, left max, right min, right max")]
     public int[] bounds = new int[4];
-    public bool inverted;//TODO
+    public bool inverted;//TODO, check to add from other scripts in final setting.
 
 	private bool isInRange;
 	private string lastDirection;
@@ -18,6 +18,7 @@ public class HeadRotationTask : MonoBehaviour {
 
     private string[] mouseResponse = new string[] {"left", "right"};
     private int count;
+    private float elapsedTime;
 
 	void Start() {
 		string[] directions = new string[] {"left", "right"};
@@ -58,19 +59,27 @@ public class HeadRotationTask : MonoBehaviour {
 		if(trialOrNot == 1) {
 			sound.Play();
             _timer.stopwatch.Start();
+            elapsedTime = 0f;
 
-            while (!Input.anyKeyDown) //while there is no key pressed, wait.
+            while (!Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+            //while (!Input.GetKeyDown("x") && !Input.GetKeyDown("c"))
+            { //while there is no key pressed, wait.
                 yield return null;
+                elapsedTime += Time.deltaTime;
+            }
+
 
             if (Input.GetMouseButton(0)) //if the pressed key is left
+            //if (Input.GetKeyDown("x"))//for testing
                 if (side == mouseResponse[0]) answer = "correct";
                 else answer = "incorrect";
 
             else if (Input.GetMouseButton(1))//if the pressed key is right
+            //if (Input.GetKeyDown("c"))
                 if (side == mouseResponse[1]) answer = "correct";
                 else answer = "incorrect";
 
-            string[] variables = new string[] { count.ToString(), inverted.ToString(), side, _timer.ElapsedTimeAndRestart(), answer };
+            string[] variables = new string[] { count.ToString(), inverted.ToString(), side, _timer.ElapsedTimeAndRestart(), answer };//elapsedTime.ToString() for comparisson
 
             CsvWrite.instance.WriteLine(variables);//writes trial to file
             Debug.Log(string.Join(",",variables));
@@ -82,7 +91,7 @@ public class HeadRotationTask : MonoBehaviour {
 		}
 
 		else yield return null;//so not each head turn is a trial
-
+        
         if (count == totalTrials)
             Debug.Log("condition is over");
 
